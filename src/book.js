@@ -1,8 +1,11 @@
 'use strict';
 
 const libraryBooks = document.querySelector('#library-books');
+const newBook = document.querySelector('#new-book');
 
-let myLibrary = []
+let myLibrary = [{title: "Game of Thrones", author: "George R. R. Martin", pages: "894", isRead: "true"},
+                 {title: "Assassin's Fate", author: "Robin Hobb", pages: "557", isRead: "true"},
+                 {title: "The Dark Tower", author: "Stephen King", pages: "692", isRead: "true"}]
 
 function Book(title, author, pages, isRead = false) {
   this.title = title;
