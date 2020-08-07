@@ -39,4 +39,12 @@ function render(myLibrary) {
   }
 }
 
+function showForm() {
+  document.getElementById("newBookForm").style.display = "block";
+};
+
+function hideForm() {
+  document.getElementById("newBookForm").style.display = "none";
+};
+
 // var book = new Book('Game of Thrones', 'George R. R. Martin', 651, true);
