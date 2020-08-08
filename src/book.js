@@ -3,6 +3,7 @@
 const libraryBooks = document.querySelector('#library-books');
 const newBookForm = document.querySelector('#add-book-form');
 const newBookButton = document.querySelector('#new-book-btn');
+const checkBox = document.querySelector('#is-read')
 
 let myLibrary = [];
 
@@ -32,6 +33,13 @@ function addBookToLibrary(event) {
   let author = document.querySelector("#author").value;
   let pages = parseInt(document.querySelector("#pages").value);
   let isRead = document.querySelector("#is-read").value;
+
+  if (checkBox.checked == true) {
+    isRead = 'Yes';
+  }  else {
+    isRead = 'No';
+  };
+
   let book = new Book(title, author, pages, isRead)
   myLibrary.push(book);
   render(myLibrary)
@@ -46,7 +54,7 @@ function resetForm() {
   document.getElementById("title").value = '';
   document.getElementById("author").value = '';
   document.getElementById("pages").value = '';
-  document.getElementById("is-read").value = '';
+  document.getElementById("is-read").checked = false;
   hideForm()
 }
 
