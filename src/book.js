@@ -34,11 +34,20 @@ function addBookToLibrary(event) {
   let book = new Book(title, author, pages, isRead)
   myLibrary.push(book);
   render(myLibrary)
+  resetForm()
+  hideForm()
 };
 
 document.addEventListener('DOMContentLoaded', render(myLibrary));
 
 form.addEventListener('submit', addBookToLibrary);
+
+function resetForm() {
+  document.getElementById("title").value = '';
+  document.getElementById("author").value = '';
+  document.getElementById("pages").value = '';
+  document.getElementById("is-read").value = '';
+}
 
 function showForm() {
   document.getElementById("new-book-form").style.display = "block";
