@@ -1,7 +1,7 @@
 'use strict';
 
 const libraryBooks = document.querySelector('#library-books');
-const form = document.querySelector('#add-book-form');
+const newBookForm = document.querySelector('#add-book-form');
 const newBookButton = document.querySelector('#new-book-btn');
 
 let myLibrary = [];
@@ -42,14 +42,6 @@ function showForm() {
   document.getElementById("new-book-form").style.display = "block";
 };
 
-document.addEventListener('DOMContentLoaded', render(myLibrary));
-
-newBookButton.addEventListener('click', showForm);
-
-form.addEventListener('submit', addBookToLibrary);
-
-form.addEventListener('reset', resetForm)
-
 function resetForm() {
   document.getElementById("title").value = '';
   document.getElementById("author").value = '';
@@ -58,8 +50,14 @@ function resetForm() {
   hideForm()
 }
 
-
-
 function hideForm() {
   document.getElementById("new-book-form").style.display = "none";
 };
+
+document.addEventListener('DOMContentLoaded', render(myLibrary));
+
+newBookButton.addEventListener('click', showForm);
+
+newBookForm.addEventListener('submit', addBookToLibrary);
+
+newBookForm.addEventListener('reset', resetForm)
