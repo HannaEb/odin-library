@@ -1,29 +1,15 @@
 'use strict';
 
 const libraryBooks = document.querySelector('#library-books');
-const newBook = document.querySelector('#new-book');
+const form = document.querySelector('#add-book-form');
 
-let myLibrary = [{title: "Game of Thrones", author: "George R. R. Martin", pages: "894", isRead: "true"},
-                 {title: "Assassin's Fate", author: "Robin Hobb", pages: "557", isRead: "true"},
-                 {title: "The Dark Tower", author: "Stephen King", pages: "692", isRead: "true"}]
+let myLibrary = [];
 
 function Book(title, author, pages, isRead = false) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.isRead = isRead;
-  this.info = function() {
-    return(title + ' by ' + author)
-  };
-};
-
-function addBookToLibrary() {
-  var title = prompt("Title:");
-  var author = prompt("Author:");
-  var pages = prompt("Number of pages:");
-  var isRead = prompt("Have you read this book? Enter true or false:");
-  let book = new Book(title, author, pages, isRead)
-  return myLibrary.push(book);
 };
 
 function render(myLibrary) {
@@ -36,15 +22,28 @@ function render(myLibrary) {
         <td>${myLibrary[i].pages}</td>
         <td>${myLibrary[i].isRead}</td>
       </tr>`;
-  }
-}
+  };
+};
+
+function addBookToLibrary(event) {
+  event.preventDefault();
+  let title = document.querySelector("#title").value;
+  let author = document.querySelector("#author").value;
+  let pages = parseInt(document.querySelector("#pages").value);
+  let isRead = document.querySelector("#is-read").value;
+  let book = new Book(title, author, pages, isRead)
+  myLibrary.push(book);
+  render(myLibrary)
+};
+
+document.addEventListener('DOMContentLoaded', render(myLibrary));
+
+form.addEventListener('submit', addBookToLibrary);
 
 function showForm() {
-  document.getElementById("newBookForm").style.display = "block";
+  document.getElementById("new-book-form").style.display = "block";
 };
 
 function hideForm() {
-  document.getElementById("newBookForm").style.display = "none";
+  document.getElementById("new-book-form").style.display = "none";
 };
-
-// var book = new Book('Game of Thrones', 'George R. R. Martin', 651, true);
