@@ -14,18 +14,25 @@ function Book(title, author, pages, isRead = false) {
   this.isRead = isRead;
 };
 
+function drawTable(tbody) {
+  var tr, td;
+  tbody = document.getElementById(tbody);
+  for (var i = 0; i < myLibrary.length; i++) {
+    tr = tbody.insertRow(tbody.rows.length);
+    td = tr.insertCell(tr.cells.length);
+    td.innerHTML = myLibrary[i].title;
+    td = tr.insertCell(tr.cells.length);
+    td.innerHTML = myLibrary[i].author;
+    td = tr.insertCell(tr.cells.length);
+    td.innerHTML = myLibrary[i].pages;
+    td = tr.insertCell(tr.cells.length);
+    td.innerHTML = myLibrary[i].isRead;
+  }
+}
+
 function render(myLibrary) {
-  libraryBooks.innerHTML = '';
-  for (let i = 0; i < myLibrary.length; i++) {
-    libraryBooks.innerHTML +=
-      `<tr index="${i}">
-        <td>${myLibrary[i].title}</td>
-        <td>${myLibrary[i].author}</td>
-        <td>${myLibrary[i].pages}</td>
-        <td>${myLibrary[i].isRead}</td>
-      </tr>`;
-  };
-};
+  drawTable("library-books")
+}
 
 function addBookToLibrary(event) {
   event.preventDefault();
