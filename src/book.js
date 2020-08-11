@@ -3,6 +3,7 @@
 const libraryBooks = document.querySelector('#library-books');
 const newBookForm = document.querySelector('#add-book-form');
 const newBookButton = document.querySelector('#new-book-btn');
+const removeBookButton = document.querySelector('#remove-book-btn');
 const checkBox = document.querySelector('#is-read')
 
 let myLibrary = [];
@@ -14,24 +15,22 @@ function Book(title, author, pages, isRead = false) {
   this.isRead = isRead;
 };
 
-function drawTable(tbody) {
-  var tr, td;
-  tbody = document.getElementById(tbody);
-  for (var i = 0; i < myLibrary.length; i++) {
-    tr = tbody.insertRow(tbody.rows.length);
-    td = tr.insertCell(tr.cells.length);
-    td.innerHTML = myLibrary[i].title;
-    td = tr.insertCell(tr.cells.length);
-    td.innerHTML = myLibrary[i].author;
-    td = tr.insertCell(tr.cells.length);
-    td.innerHTML = myLibrary[i].pages;
-    td = tr.insertCell(tr.cells.length);
-    td.innerHTML = myLibrary[i].isRead;
-  }
-}
-
 function render(myLibrary) {
-  drawTable("library-books")
+  var tr, td;
+  libraryBooks.innerHTML = '';
+  for (var i = 0; i < myLibrary.length; i++) {
+    tr = libraryBooks.insertRow();
+    td = tr.insertCell();
+    td.innerHTML = myLibrary[i].title;
+    td = tr.insertCell();
+    td.innerHTML = myLibrary[i].author;
+    td = tr.insertCell();
+    td.innerHTML = myLibrary[i].pages;
+    td = tr.insertCell();
+    td.innerHTML = myLibrary[i].isRead;
+    td = tr.insertCell();
+    td.innerHTML = '<input type="button" value="remove">';
+    }
 }
 
 function addBookToLibrary(event) {
@@ -68,8 +67,6 @@ function resetForm() {
 function hideForm() {
   document.getElementById("new-book-form").style.display = "none";
 };
-
-document.addEventListener('DOMContentLoaded', render(myLibrary));
 
 newBookButton.addEventListener('click', showForm);
 
