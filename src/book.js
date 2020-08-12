@@ -3,10 +3,10 @@
 const libraryBooks = document.querySelector('#library-books');
 const newBookForm = document.querySelector('#add-book-form');
 const newBookButton = document.querySelector('#new-book-btn');
-const removeBookButton = document.querySelector('#remove-book-btn');
+
 const checkBox = document.querySelector('#is-read');
 
-// const removeBookButton = document.querySelector('#remove-book-btn');
+
 
 let myLibrary = [];
 
@@ -22,9 +22,7 @@ function render(myLibrary) {
   libraryBooks.innerHTML = '';
   for (var i = 0; i < myLibrary.length; i++) {
     tr = libraryBooks.insertRow();
-    tr.setAttribute("index", `${i}`);
-    // td = tr.insertCell();
-    // td.innerHTML = tr.getAttribute("index");
+    var index = tr.setAttribute("index", `${i}`);
     td = tr.insertCell();
     td.innerHTML = myLibrary[i].title;
     td = tr.insertCell();
@@ -34,10 +32,12 @@ function render(myLibrary) {
     td = tr.insertCell();
     td.innerHTML = myLibrary[i].isRead;
     td = tr.insertCell();
-    td.innerHTML = '<input type="button" value="remove" id="remove-book-btn">';
+    td.innerHTML = `<button id="remove-book-btn">Remove</button>`;
+
+    const removeBookButton = document.querySelector('#remove-book-btn');
+    removeBookButton.addEventListener('click', removeBook);
     }
 }
-
 
 function addBookToLibrary(event) {
   event.preventDefault();
@@ -74,14 +74,19 @@ function hideForm() {
   document.getElementById("new-book-form").style.display = "none";
 }
 
-function removeBook(book) {
-
+function removeBook(event) {
+  let index = event.target.parentElement.getAttribute("index");
+  myLibrary.splice(index, 1);
+  render(myLibrary);
 }
+
+
+
+
+
 
 newBookButton.addEventListener('click', showForm);
 
 newBookForm.addEventListener('submit', addBookToLibrary);
 
 newBookForm.addEventListener('reset', resetForm);
-
-removeBookButton.addEventListener('delete', removeBook);
